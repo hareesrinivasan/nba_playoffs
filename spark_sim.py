@@ -20,7 +20,7 @@ class SimSeriesAll:
         self._select_round()
         self._compute_season_weights()
         self._create_rdd()
-        self._sim_all_series()
+        # self._sim_all_series()
 
         # self.winner_accuracy = sum(self.series_df.Correct_Winner) / self.series_df.shape[0]
         # self.games_accuracy = sum(self.series_df.Correct_Games) / self.series_df.shape[0]
@@ -135,7 +135,6 @@ class SimSeriesAll:
     def _single_game_sim(self, yr, home, visitor, series_id, game_id, game, split_stats, off_weight, def_weight):
         home_stats = split_stats.loc[(split_stats.split_value == "Home") & (split_stats.team == home)]
         visitor_stats = split_stats.loc[(split_stats.split_value == "Visitor") & (split_stats.team == visitor)]
-        print(f"Simming {yr} {visitor} @ {home}")
         home_score = self._sim_score(home_stats, visitor_stats, off_weight, def_weight)
         visitor_score = self._sim_score(visitor_stats, home_stats, off_weight, def_weight)
 
@@ -175,7 +174,7 @@ class SimSeriesAll:
 
 
 if __name__=="__main__":
-    c = SimSeriesAll(game_iters=10, series_iters=10)
+    c = SimSeriesAll(game_iters=15000, series_iters=15000)
     c.execute()
     # d = c.raw_results
     print("Done")
