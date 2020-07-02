@@ -115,7 +115,9 @@ class SimSeriesAll:
                             self.rdd_as_list.append([yr, team2, team1, series_id,
                                                      game_id, game, split_stats,
                                                      off_weight, def_weight])
+            print(f"Completed {team1} vs {team2}")
         print("Created RDD")
+
     def _retrieve_data(self, year, team1, team2):
         two_team_splits = (self.splits_data.loc[(self.splits_data.yr == year) &
                                       ((self.splits_data.team == team1) |
