@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import pyspark
 
+
 class SimSeriesAll:
     def __init__(self, series_iters=15000, game_iters=15000, sim_round="all"):
         self.series_iters = series_iters
@@ -124,14 +125,11 @@ class SimSeriesAll:
     def _sim_all_series(self):
         sc = pyspark.SparkContext('local[*]')
         results_rdd = sc.parallelize(self.rdd_as_list)
-        # t = self.rdd_as_list[0]
-        # print(self._single_game_sim(t[0], t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8]))
 
         results_rdd = results_rdd.map(lambda x: self._single_game_sim(x[0], x[1], x[2],
                                                                    x[3], x[4], x[5],
                                                                    x[6], x[7], x[8]))
         results_rdd.saveAsTextFile("output")
-        # print(results_rdd.take(1))
         sc.stop()
 
     def _single_game_sim(self, yr, home, visitor, series_id, game_id, game, split_stats, off_weight, def_weight):
@@ -177,7 +175,7 @@ class SimSeriesAll:
 
 
 if __name__=="__main__":
-    c = SimSeriesAll(game_iters=15000, series_iters=15000)
+    c = SimSeriesAll(game_iters=1, series_iters=1)
     c.execute()
     # d = c.raw_results
     print("Done")
