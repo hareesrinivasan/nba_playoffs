@@ -177,7 +177,7 @@ class SimSeriesAll:
 
 
 if __name__=="__main__":
-    c = SimSeriesAll(game_iters=1, series_iters=1)
+    c = SimSeriesAll(game_iters=15000, series_iters=15000)
     c.execute()
     # d = c.raw_results
     print("Done")
