@@ -115,7 +115,7 @@ class SimSeriesAll:
                             self.rdd_as_list.append([yr, team2, team1, series_id,
                                                      game_id, game, split_stats,
                                                      off_weight, def_weight])
-
+        print("Created RDD")
     def _retrieve_data(self, year, team1, team2):
         two_team_splits = (self.splits_data.loc[(self.splits_data.yr == year) &
                                       ((self.splits_data.team == team1) |
@@ -135,7 +135,7 @@ class SimSeriesAll:
     def _single_game_sim(self, yr, home, visitor, series_id, game_id, game, split_stats, off_weight, def_weight):
         home_stats = split_stats.loc[(split_stats.split_value == "Home") & (split_stats.team == home)]
         visitor_stats = split_stats.loc[(split_stats.split_value == "Visitor") & (split_stats.team == visitor)]
-
+        print(f"Simming {yr} {visitor} @ {home}")
         home_score = self._sim_score(home_stats, visitor_stats, off_weight, def_weight)
         visitor_score = self._sim_score(visitor_stats, home_stats, off_weight, def_weight)
 
@@ -175,7 +175,7 @@ class SimSeriesAll:
 
 
 if __name__=="__main__":
-    c = SimSeriesAll(game_iters=15000, series_iters=15000)
+    c = SimSeriesAll(game_iters=10, series_iters=10)
     c.execute()
     # d = c.raw_results
     print("Done")
